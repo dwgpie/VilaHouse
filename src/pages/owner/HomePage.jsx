@@ -12,6 +12,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const listMenu = [
   {
@@ -64,12 +65,14 @@ const accountList = [
   },
   {
     name: "Logout",
-    path: "/profile",
+    path: "/logout",
     icon: <LogOut size={24} />,
   },
 ];
 
 const HomePage = () => {
+  const history = useNavigate();
+
   return (
     <div className="w-full h-full grid grid-cols-6  ">
       {/* Sidebar */}
@@ -88,6 +91,9 @@ const HomePage = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -103,6 +109,9 @@ const HomePage = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -340,7 +349,12 @@ const HomePage = () => {
                       vantung.02@gmail.com
                     </div>
                     <div className="flex justify-center mt-[50px]">
-                      <button className="h-[40px] w-[200px] rounded-[5px] bg-[#000] text-white font-bold">
+                      <button
+                        className="h-[40px] w-[200px] rounded-[5px] bg-[#000] text-white font-bold"
+                        onClick={() => {
+                          history("/profile");
+                        }}
+                      >
                         Edit Profile
                       </button>
                     </div>

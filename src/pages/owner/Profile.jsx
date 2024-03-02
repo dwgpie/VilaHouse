@@ -12,6 +12,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const listMenu = [
   {
@@ -64,12 +65,14 @@ const accountList = [
   },
   {
     name: "Logout",
-    path: "/profile",
+    path: "/logout",
     icon: <LogOut size={24} />,
   },
 ];
 
 const Profile = () => {
+  const history = useNavigate();
+
   return (
     <div className="w-full h-full grid grid-cols-6  ">
       {/* Sidebar */}
@@ -88,6 +91,9 @@ const Profile = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -103,6 +109,9 @@ const Profile = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -225,14 +234,7 @@ const Profile = () => {
                   placeholder="12 An Manh Street, Hoa An, Cam Le, Da Nang"
                 />
               </div>
-              <div className="mb-[20px]">
-                <h1 className="font-bold mb-[5px] ">Password</h1>
-                <input
-                  className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
-                  type="text"
-                  placeholder="dsda23232"
-                />
-              </div>
+
               <div className="mb-[20px] flex items-end">
                 <div>
                   <h1 className="font-bold mb-[5px] ">Wallet</h1>
@@ -253,6 +255,17 @@ const Profile = () => {
                     <option value="4">Four</option>
                   </select>
                 </div>
+              </div>
+              <div className="mb-[20px]">
+                <h1 className="font-bold mb-[5px] ">Password</h1>
+                <input
+                  className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
+                  type="text"
+                  placeholder="dsda23232"
+                />
+                <button className="ml-[25px] h-[35px] w-[122px] rounded-[5px] bg-[#0F172A] text-[#fff]">
+                  Reset Password
+                </button>
               </div>
               <div className="mt-[120px] ml-[250px]">
                 <button className="ml-[10px] h-[40px] w-[122px] rounded-[5px] bg-[#0F172A] text-[#fff]">

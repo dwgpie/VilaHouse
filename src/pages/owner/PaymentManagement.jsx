@@ -11,7 +11,8 @@ import {
   Bolt,
   HelpCircle,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const listMenu = [
   {
@@ -64,14 +65,17 @@ const accountList = [
   },
   {
     name: "Logout",
-    path: "/profile",
+    path: "/logout",
     icon: <LogOut size={24} />,
   },
 ];
 
 const PaymentManagement = () => {
+  const history = useNavigate();
+  const [showDiaLog, setShowDiaLog] = useState(false);
+
   return (
-    <div className="w-full h-full grid grid-cols-6  ">
+    <div className={`w-full h-full grid grid-cols-6`}>
       {/* Sidebar */}
       <div className=" h-full py-9 px-6 bg-gradient-to-b from-[#3C4448] to-[#202021]">
         <div className="mb-14 flex items-center gap-3">
@@ -88,6 +92,9 @@ const PaymentManagement = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -103,6 +110,9 @@ const PaymentManagement = () => {
             <div
               className="px-[10px] py-2 text-[#F6F6BD] w-full rounded-md hover:bg-[#F6F6BD] hover:text-[#3C4448] text-xs"
               key={item.name}
+              onClick={() => {
+                history(`${item.path}`);
+              }}
             >
               <div className="flex items-center gap-3 font-bold cursor-pointer">
                 {item.icon}
@@ -166,7 +176,12 @@ const PaymentManagement = () => {
           <button className="h-[40px] w-[122px] rounded-[5px] bg-[#fff] text-[#606C72] ">
             Wallet
           </button>
-          <button className="ml-[10px] h-[40px] w-[122px] rounded-[5px] bg-[#0F172A] text-[#fff]">
+          <button
+            className="ml-[10px] h-[40px] w-[122px] rounded-[5px] bg-[#0F172A] text-[#fff] "
+            onClick={() => {
+              setShowDiaLog(!showDiaLog);
+            }}
+          >
             Create Wallet
           </button>
         </div>
@@ -440,67 +455,69 @@ const PaymentManagement = () => {
         </div>
       </div>
       {/* Edit Wallet*/}
-      <div className="h-[300px] w-[700px] bg-[#F5F5F5] rounded-[5px] px-[40px] m-[30px]">
-        <div className="flex justify-center mb-[20px]">
-          <div className="h-[45px] w-[340px] bg-[#3C4448] flex justify-center items-center text-[#F6F6BD] rounded-b-[50px]">
-            Edit Wallet
+      {showDiaLog && (
+        <div className="h-[300px] w-[700px] bg-[#F5F5F5] rounded-[5px] px-[40px] m-[30px]">
+          <div className="flex justify-center mb-[20px]">
+            <div className="h-[45px] w-[340px] bg-[#3C4448] flex justify-center items-center text-[#F6F6BD] rounded-b-[50px]">
+              Edit Wallet
+            </div>
+          </div>
+          <div className="flex items-center mb-[20px] ">
+            <div>
+              <h1 className="font-bold mb-[5px] ">Name</h1>
+              <input
+                className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
+                type="text"
+                placeholder="Pietro Schirano"
+              />
+            </div>
+            <div className=" ml-[40px] mt-[27px] ">
+              <select
+                data-te-select-init
+                className="py-[4px] px-[8px] text-[#3C4448] rounded-[5px] font-bold text-[15px] cursor-pointer border-2"
+              >
+                <option value="1">BANK</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+              </select>
+            </div>
+            <div className="mt-[27px] ml-[20px]">
+              <input
+                className="w-[180px] h-[36px] rounded-[5px] pl-[8px] border-2"
+                type="text"
+                placeholder="TECHCOMBANK"
+              />
+            </div>
+          </div>
+          <div className="flex items-center mb-[20px]">
+            <div>
+              <h1 className="font-bold mb-[5px] ">Number</h1>
+              <input
+                className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
+                type="text"
+                placeholder="053245345"
+              />
+            </div>
+            <div className="ml-[40px]">
+              <h1 className="font-bold mb-[5px] ">QR Code</h1>
+              <input
+                className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2 "
+                type="text"
+                placeholder="Choose Image"
+              />
+            </div>
+          </div>
+          <div className=" flex justify-end mr-[5px] mt-[24px]">
+            <button className="mr-[20px] h-[35px] w-[100px] rounded-[5px] bg-[#EF4444] text-[#fff]">
+              Cancel
+            </button>
+            <button className=" h-[35px] w-[100px] rounded-[5px] bg-[#0F172A] text-[#fff]">
+              Create
+            </button>
           </div>
         </div>
-        <div className="flex items-center mb-[20px] ">
-          <div>
-            <h1 className="font-bold mb-[5px] ">Name</h1>
-            <input
-              className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
-              type="text"
-              placeholder="Pietro Schirano"
-            />
-          </div>
-          <div className=" ml-[40px] mt-[27px] ">
-            <select
-              data-te-select-init
-              className="py-[4px] px-[8px] text-[#3C4448] rounded-[5px] font-bold text-[15px] cursor-pointer border-2"
-            >
-              <option value="1">BANK</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-              <option value="4">Four</option>
-            </select>
-          </div>
-          <div className="mt-[27px] ml-[20px]">
-            <input
-              className="w-[180px] h-[36px] rounded-[5px] pl-[8px] border-2"
-              type="text"
-              placeholder="TECHCOMBANK"
-            />
-          </div>
-        </div>
-        <div className="flex items-center mb-[20px]">
-          <div>
-            <h1 className="font-bold mb-[5px] ">Number</h1>
-            <input
-              className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2"
-              type="text"
-              placeholder="053245345"
-            />
-          </div>
-          <div className="ml-[40px]">
-            <h1 className="font-bold mb-[5px] ">QR Code</h1>
-            <input
-              className="w-[287px] h-[36px] rounded-[5px] pl-[8px] border-2 "
-              type="text"
-              placeholder="Choose Image"
-            />
-          </div>
-        </div>
-        <div className=" flex justify-end mr-[5px] mt-[24px]">
-          <button className="mr-[20px] h-[35px] w-[100px] rounded-[5px] bg-[#EF4444] text-[#fff]">
-            Cancel
-          </button>
-          <button className=" h-[35px] w-[100px] rounded-[5px] bg-[#0F172A] text-[#fff]">
-            Create
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
